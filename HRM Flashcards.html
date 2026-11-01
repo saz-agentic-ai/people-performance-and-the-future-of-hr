@@ -1,0 +1,1149 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>HRM Flashcards</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&display=swap">
+<style>
+/* Layout concept: a lecture-hall study desk. Topic index on the left, one large card centred on the stage, a Teach mode that turns the same deck into a projectable Q and A panel. */
+:root {
+  --bg: #F1F3F7;
+  --surface: #FFFFFF;
+  --ink: #142038;
+  --muted: #556079;
+  --line: #D6DCE7;
+  --accent: #0A5C73;
+  --accent-ink: #FFFFFF;
+  --accent-soft: #DDEDF2;
+  --back-bg: #142038;
+  --back-fg: #EEF2F8;
+  --back-muted: #A9B5CB;
+  --back-accent: #8ED3E6;
+  --back-line: rgba(255, 255, 255, 0.18);
+  --good: #17703F;
+  --good-ink: #FFFFFF;
+  --warn: #A8481A;
+  --shadow: 0 1px 2px rgba(20, 32, 56, 0.06), 0 14px 32px -16px rgba(20, 32, 56, 0.28);
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-body: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1422;
+    --surface: #161F33;
+    --ink: #E6EBF5;
+    --muted: #9BA7BE;
+    --line: #27324D;
+    --accent: #6CC4D9;
+    --accent-ink: #0A1B22;
+    --accent-soft: #14323D;
+    --back-bg: #0F3A48;
+    --back-fg: #E9F6FA;
+    --back-muted: #9CC3CF;
+    --back-accent: #6CC4D9;
+    --good: #62CF93;
+    --good-ink: #08210F;
+    --warn: #F2A674;
+    --shadow: 0 14px 32px -16px rgba(0, 0, 0, 0.65);
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1422;
+  --surface: #161F33;
+  --ink: #E6EBF5;
+  --muted: #9BA7BE;
+  --line: #27324D;
+  --accent: #6CC4D9;
+  --accent-ink: #0A1B22;
+  --accent-soft: #14323D;
+  --back-bg: #0F3A48;
+  --back-fg: #E9F6FA;
+  --back-muted: #9CC3CF;
+  --back-accent: #6CC4D9;
+  --good: #62CF93;
+  --good-ink: #08210F;
+  --warn: #F2A674;
+  --shadow: 0 14px 32px -16px rgba(0, 0, 0, 0.65);
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.55;
+}
+.app {
+  padding-block: 28px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.wrap { max-width: 1180px; margin-inline: auto; }
+
+.eyebrow {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+h1, h2, h3 { font-family: var(--font-display); font-weight: 600; text-wrap: balance; margin: 0; }
+
+/* Header */
+.top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 32px;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--line);
+}
+.brand { min-width: 0; flex: 1 1 360px; display: grid; gap: 6px; }
+h1 { font-size: clamp(1.9rem, 4.6vw, 2.75rem); line-height: 1.1; letter-spacing: -0.01em; }
+.lede { margin: 0; color: var(--muted); max-width: 56ch; }
+.top-tools { display: grid; gap: 10px; justify-items: end; }
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); padding: 3px; gap: 3px; }
+.seg button {
+  font: 600 0.9rem var(--font-body);
+  color: var(--muted);
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  padding: 0.5rem 1.1rem;
+  min-height: 40px;
+  cursor: pointer;
+}
+.seg button[aria-pressed="true"] { background: var(--accent); color: var(--accent-ink); }
+.overall { margin: 0; font-family: var(--font-mono); font-size: 0.8rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* Layout */
+.layout { display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 32px; padding-top: 24px; align-items: start; }
+.topics { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.unit-label { margin: 18px 0 6px; padding-inline: 0.75rem; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.unit-label:first-child { margin-top: 0; }
+.topic-btn {
+  display: grid;
+  gap: 6px;
+  width: 100%;
+  text-align: left;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  padding: 0.6rem 0.75rem;
+  cursor: pointer;
+}
+.topic-btn:hover { background: var(--accent-soft); }
+.topic-btn[aria-current="true"] { background: var(--accent-soft); }
+.topic-btn .t { font-weight: 600; font-size: 0.92rem; line-height: 1.3; }
+.topic-btn .m { display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 0.7rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.mini { height: 3px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.mini i { display: block; height: 100%; background: var(--good); }
+
+/* Stage */
+.stage { min-width: 0; display: grid; gap: 18px; align-content: start; }
+.stage:fullscreen { background: var(--bg); padding: 2rem; overflow: auto; }
+.stage-head { display: flex; flex-wrap: wrap; gap: 6px 20px; align-items: flex-end; justify-content: space-between; }
+.stage-head > div { min-width: 0; display: grid; gap: 4px; }
+.stage-head h2 { font-size: clamp(1.25rem, 2.6vw, 1.6rem); line-height: 1.25; }
+.counter { margin: 0; font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.track { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.track i { display: block; height: 100%; width: 0; background: var(--accent); transition: width 0.3s ease; }
+
+/* Flip card */
+.scene { perspective: 1600px; }
+.card {
+  display: grid;
+  position: relative;
+  min-height: 340px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+  border-radius: 8px;
+}
+.card.flipped { transform: rotateY(180deg); }
+.face {
+  grid-area: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  border-radius: 8px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  box-shadow: var(--shadow);
+}
+.front { background: var(--surface); border: 1px solid var(--line); }
+.back { background: var(--back-bg); color: var(--back-fg); transform: rotateY(180deg); --mark: var(--back-accent); }
+.face-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.back .label { color: var(--back-muted); }
+.badge { font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.55rem; border-radius: 4px; border: 1px solid currentColor; }
+.badge.known { color: var(--good); }
+.badge.review { color: var(--warn); }
+.q { flex: 1; display: flex; align-items: center; font-size: clamp(1.4rem, 3.4vw, 2rem); line-height: 1.25; }
+.hint { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+.body { flex: 1; display: grid; gap: 12px; align-content: start; min-width: 0; }
+.ans { margin: 0; font-size: 1.08rem; line-height: 1.55; }
+.pts { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; counter-reset: n; }
+.pts li { position: relative; padding-left: 1.2rem; font-size: 0.98rem; overflow-wrap: anywhere; }
+ul.pts li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 6px; height: 6px; background: var(--mark, var(--accent)); }
+ol.pts li { padding-left: 2rem; counter-increment: n; }
+ol.pts li::before { content: counter(n) "."; position: absolute; left: 0; top: 0.08em; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 500; color: var(--mark, var(--accent)); }
+.note { padding-top: 14px; border-top: 1px solid var(--back-line); font-size: 0.92rem; color: var(--back-fg); }
+.note b { display: block; margin-bottom: 2px; font-family: var(--font-mono); font-size: 0.68rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--back-accent); }
+
+/* Teach panel */
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; box-shadow: var(--shadow); padding: clamp(1.25rem, 4vw, 2.5rem); display: grid; gap: 22px; }
+.t-q { font-size: clamp(1.7rem, 4vw, 2.8rem); line-height: 1.2; }
+.t-a { display: grid; gap: 16px; padding-top: 22px; border-top: 1px solid var(--line); --mark: var(--accent); }
+.t-a .ans { font-size: clamp(1.15rem, 2.2vw, 1.4rem); }
+.t-a .pts li { font-size: clamp(1.02rem, 1.9vw, 1.2rem); }
+.t-note { background: var(--accent-soft); border-radius: 6px; padding: 14px 16px; font-size: 1.02rem; }
+.t-note b { display: block; margin-bottom: 2px; font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); }
+.t-hint { margin: 0; font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+
+/* Summary and empty */
+.done-panel { text-align: left; }
+.done-panel h3 { font-size: clamp(1.5rem, 3.4vw, 2.1rem); }
+.done-panel p { margin: 0; color: var(--muted); max-width: 52ch; }
+.tally { display: flex; flex-wrap: wrap; gap: 12px; }
+.tally div { flex: 1 1 140px; border: 1px solid var(--line); border-radius: 6px; padding: 12px 16px; display: grid; gap: 2px; }
+.tally strong { font-family: var(--font-display); font-size: 2rem; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.tally span { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.tally .k strong { color: var(--good); }
+.tally .r strong { color: var(--warn); }
+
+/* Buttons */
+.actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn {
+  font: 600 0.92rem var(--font-body);
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  min-height: 44px;
+  padding: 0.6rem 1.15rem;
+  cursor: pointer;
+}
+.btn:hover:not(:disabled) { border-color: var(--accent); }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.btn.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
+.btn.good { background: var(--good); border-color: var(--good); color: var(--good-ink); flex: 1 1 160px; }
+.btn.warn { color: var(--warn); border-color: var(--warn); flex: 1 1 160px; }
+.btn[aria-pressed="true"] { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+.actions .grow { flex: 1 1 140px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 8px; padding-top: 6px; border-top: 1px solid var(--line); }
+.toolbar .btn { min-height: 38px; padding: 0.4rem 0.9rem; font-size: 0.84rem; font-weight: 500; }
+.keys { margin: 0; font-family: var(--font-mono); font-size: 0.72rem; color: var(--muted); }
+
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+@media (max-width: 899px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .topics { flex-direction: row; gap: 8px; overflow-x: auto; padding-bottom: 8px; }
+  .unit-label { display: none; }
+  .topic-btn { flex: 0 0 auto; width: 160px; background: var(--surface); border: 1px solid var(--line); }
+  .top-tools { justify-items: start; }
+  .card { min-height: 300px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .card, .track i { transition: none; }
+}
+</style>
+
+<div class="app">
+  <div class="wrap">
+    <header class="top">
+      <div class="brand">
+        <p class="eyebrow">Human Resource Management</p>
+        <h1>HRM Flashcards</h1>
+        <p class="lede">Ten topics on performance appraisal, training and development, retention and the role of AI in HR. Study alone, or switch to Teach mode to run it as a class.</p>
+      </div>
+      <div class="top-tools">
+        <div class="seg" role="group" aria-label="Mode">
+          <button type="button" id="modeStudy" aria-pressed="true">Study</button>
+          <button type="button" id="modeTeach" aria-pressed="false">Teach</button>
+        </div>
+        <p class="overall" id="overall"></p>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="topics" id="topics" aria-label="Topics"></nav>
+
+      <main class="stage" id="stage">
+        <div class="stage-head">
+          <div>
+            <p class="eyebrow" id="unitLabel"></p>
+            <h2 id="deckTitle"></h2>
+          </div>
+          <p class="counter" id="counter"></p>
+        </div>
+        <div class="track" id="track" role="progressbar" aria-label="Deck progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="bar"></i></div>
+
+        <section id="studyView" aria-label="Flashcard">
+          <div class="scene">
+            <div class="card" id="card" role="button" tabindex="0" aria-label="Flashcard. Press Space to flip.">
+              <div class="face front" id="faceFront">
+                <div class="face-top"><span class="label">Question</span><span class="badge" id="badge" hidden></span></div>
+                <h3 class="q" id="qText"></h3>
+                <p class="hint">Click the card or press Space to see the answer</p>
+              </div>
+              <div class="face back" id="faceBack" aria-hidden="true">
+                <div class="face-top"><span class="label">Answer</span></div>
+                <div class="body" id="backBody"></div>
+                <div class="note" id="backNote"><b>Think about it</b><span id="backNoteText"></span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="teachView" class="panel" aria-label="Teaching view" hidden>
+          <p class="eyebrow">Question</p>
+          <h3 class="t-q" id="tQ"></h3>
+          <div class="t-a" id="tA" hidden>
+            <div class="body" id="tBody"></div>
+            <div class="t-note" id="tNote"><b>Ask the class</b><span id="tNoteText"></span></div>
+          </div>
+          <p class="t-hint" id="tHint">Pose the question first. Press Space or the button below to reveal the answer.</p>
+        </section>
+
+        <section id="summaryView" class="panel done-panel" aria-label="Deck summary" hidden>
+          <p class="eyebrow">Topic complete</p>
+          <h3 id="sumTitle"></h3>
+          <div class="tally">
+            <div class="k"><strong id="sumKnown">0</strong><span>Got it</span></div>
+            <div class="r"><strong id="sumReview">0</strong><span>To review</span></div>
+          </div>
+          <p id="sumText"></p>
+          <div class="actions">
+            <button type="button" class="btn primary" id="sumMissed">Review missed cards</button>
+            <button type="button" class="btn" id="sumRestart">Start again</button>
+            <button type="button" class="btn" id="sumNext">Next topic</button>
+          </div>
+        </section>
+
+        <section id="emptyView" class="panel done-panel" aria-label="No cards" hidden>
+          <p class="eyebrow">Nothing to review</p>
+          <h3>No missed cards in this topic</h3>
+          <p>Mark cards as 'Review again' while studying and they will collect here.</p>
+          <div class="actions"><button type="button" class="btn primary" id="emptyBack">Show all cards</button></div>
+        </section>
+
+        <div class="actions" id="actions">
+          <button type="button" class="btn grow" id="prev">&larr; Previous</button>
+          <button type="button" class="btn primary grow" id="flip">Flip card</button>
+          <button type="button" class="btn grow" id="next">Next &rarr;</button>
+        </div>
+        <div class="actions" id="marks">
+          <button type="button" class="btn warn" id="mReview">Review again</button>
+          <button type="button" class="btn good" id="mKnown">Got it</button>
+        </div>
+
+        <div class="toolbar">
+          <button type="button" class="btn" id="shuffleBtn" aria-pressed="false">Shuffle</button>
+          <button type="button" class="btn" id="missedBtn" aria-pressed="false">Missed only</button>
+          <button type="button" class="btn" id="fsBtn">Full screen</button>
+          <button type="button" class="btn" id="resetBtn">Reset progress</button>
+        </div>
+        <p class="keys">Space flips &nbsp;·&nbsp; &larr; &rarr; move &nbsp;·&nbsp; 1 review again &nbsp;·&nbsp; 2 got it</p>
+      </main>
+    </div>
+  </div>
+</div>
+<div class="sr" id="live" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  var c = function (q, a, pts, note, ord) {
+    return { q: q, a: a, pts: pts || [], note: note || "", ord: !!ord };
+  };
+
+  var U1 = "Unit I · Performance Appraisal";
+  var U2 = "Unit II · Training and Development";
+  var U3 = "Unit III · Retention and HR Trends";
+
+  var DECKS = [
+    {
+      id: "pa-intro", unit: U1, title: "Performance Appraisal: Introduction",
+      cards: [
+        c("What is performance appraisal?",
+          "A systematic, periodic evaluation of an employee's job performance and potential against agreed standards, followed by feedback to the employee.",
+          ["Systematic: follows a defined procedure", "Periodic: usually annual or half-yearly", "Two-way: ends in a feedback conversation"],
+          "How is an appraisal different from a school exam? Both measure, but an appraisal should also guide future growth."),
+        c("State the main objectives of performance appraisal.",
+          "Appraisal serves both administrative decisions and employee development.",
+          ["Decide pay rises, bonuses, promotions and transfers", "Identify training and development needs", "Give employees clear feedback on how they are doing", "Check whether selection and placement decisions were sound", "Improve communication between manager and employee"],
+          "Which objective matters most to an employee, and which matters most to the CEO?"),
+        c("Performance appraisal vs performance management",
+          "Appraisal is a periodic event that rates past performance. Performance management is a continuous cycle of planning, coaching, reviewing and rewarding.",
+          ["Appraisal: backward-looking, once or twice a year", "Performance management: forward-looking, all year round", "Appraisal is one step inside performance management"],
+          "Sports analogy: the final score is the appraisal, the whole training season is performance management."),
+        c("Who can appraise an employee?",
+          "Modern organisations often use more than one rater.",
+          ["Immediate supervisor (the most common)", "Peers and team members", "Subordinates (upward appraisal)", "Self-appraisal", "Customers or clients", "HR specialists or external experts"],
+          "Would you feel comfortable rating your own manager? What would make it safe to be honest?"),
+        c("What can be measured in an appraisal?",
+          "Three things: traits, behaviours and results. Results are the most objective, traits the most subjective.",
+          ["Traits: initiative, reliability, attitude", "Behaviours: how the work is done, such as how a customer is handled", "Results: outcomes achieved, such as sales closed or defects reduced"],
+          "A call-centre agent has high energy (trait) but a low resolution rate (result). Which should the appraisal weigh more?"),
+        c("What makes an appraisal system effective?",
+          "Experts judge a system on whether it is valid, reliable, fair and practical.",
+          ["Validity: criteria are job-related", "Reliability: different raters reach similar scores", "Standardisation: the same process for everyone", "Acceptability: employees and managers trust it", "Practicality: reasonable cost and time"],
+          "Two managers rate the same employee 4 and 2. Which quality is missing?"),
+        c("Benefits of performance appraisal",
+          "Both sides gain, in different ways.",
+          ["Organisation: a fair basis for pay and promotion, aligned goals, evidence for HR decisions", "Employee: clarity of expectations, recognition, a personal development plan"],
+          "Why might an employee dread appraisals even though they benefit from them?"),
+        c("Performance appraisal vs potential appraisal",
+          "Performance appraisal looks at what an employee has achieved. Potential appraisal estimates what the employee could handle in a bigger role.",
+          ["Performance: past results in the current job", "Potential: leadership, learning agility, readiness for promotion", "The 9-box grid plots both to guide talent decisions"],
+          "A top salesperson may not make a good sales manager. Which appraisal would reveal that?")
+      ]
+    },
+    {
+      id: "pa-process", unit: U1, title: "The Appraisal Process",
+      cards: [
+        c("What are the steps in the appraisal process?",
+          "The process moves from setting standards to acting on the results.",
+          ["Establish performance standards", "Communicate expectations to employees", "Measure actual performance", "Compare actual performance with standards", "Discuss results in a feedback interview", "Take corrective or developmental action"],
+          "Which step do organisations skip most often, and what goes wrong when they do?", true),
+        c("Why must standards be set and shared first?",
+          "Employees cannot hit a target they have never seen. Clear, measurable, job-related standards also protect the manager from disputes.",
+          ["Link standards to the job description", "Make them measurable, such as 95% on-time delivery", "Agree them at the start of the cycle, not the end"],
+          "Compare 'be a good team player' with 'resolve 90% of tickets within 24 hours'. Which can be appraised fairly?"),
+        c("How is actual performance measured?",
+          "Managers gather evidence from four common sources.",
+          ["Personal observation", "Oral reports", "Written reports", "Statistical reports such as output, sales or error rates"],
+          "Why is a mix of sources more reliable than observation alone?"),
+        c("What makes a good feedback interview?",
+          "The appraisal interview is where the process succeeds or fails. It should be a conversation, not a verdict.",
+          ["Prepare specific examples beforehand", "Discuss behaviour, not personality", "Begin with strengths, then move to gaps", "Let the employee speak and respond", "End with an agreed action plan and dates"],
+          "Role-play: tell a colleague their reports are often late without making them defensive."),
+        c("Maier's three types of appraisal interview",
+          "Norman Maier described three styles, each suited to a different situation.",
+          ["Tell and sell: the manager explains the rating and persuades the employee to accept it", "Tell and listen: the manager explains, then lets the employee respond", "Problem solving: manager and employee jointly find causes and solutions"],
+          "Which style would you want for yourself? Which suits a new joiner?"),
+        c("Halo effect and horn effect",
+          "Two rating errors in which one trait colours all the others.",
+          ["Halo: one strong trait, such as punctuality, lifts every rating", "Horn: one weak trait drags every rating down", "Fix: rate each criterion separately"],
+          "Have you ever scored a classmate high on everything because you liked them?"),
+        c("Other common rating errors",
+          "Raters are human, so predictable biases creep in.",
+          ["Central tendency: giving everyone an average score", "Leniency or strictness: scoring too high or too low across the board", "Recency: judging on the last few weeks only", "Similar-to-me: favouring people who resemble the rater"],
+          "Every employee in a team is rated 'meets expectations'. Which error is likely?"),
+        c("How can rating errors be reduced?",
+          "Combine training, evidence and structure.",
+          ["Train raters to recognise bias", "Keep a running record of incidents all year", "Use multiple raters", "Use behaviourally anchored scales", "Hold calibration meetings across managers"],
+          "Which of these is cheapest to start tomorrow?"),
+        c("What happens after the appraisal?",
+          "Step six turns results into action.",
+          ["High performers: reward, promotion, stretch roles", "Skill gaps: training and coaching", "Poor performance: an improvement plan with review dates", "Persistent failure: transfer or separation as a last step"],
+          "Why is an appraisal with no follow-up worse than no appraisal at all?")
+      ]
+    },
+    {
+      id: "pa-methods", unit: U1, title: "Methods of Appraisal",
+      cards: [
+        c("Traditional vs modern appraisal methods",
+          "Traditional methods are mostly past-oriented and compare or rate traits. Modern methods are more future-oriented and focus on behaviours and results.",
+          ["Traditional: ranking, paired comparison, forced distribution, graphic rating scale, checklist, critical incident, essay", "Modern: MBO, BARS, 360-degree feedback, assessment centre, balanced scorecard"],
+          "Why have many organisations moved away from rating personality traits?"),
+        c("Ranking and paired comparison",
+          "Both compare employees with each other instead of against a standard.",
+          ["Ranking: order employees from best to worst", "Paired comparison: compare every employee with every other, one pair at a time", "Simple and quick, but it does not show how good anyone is in absolute terms"],
+          "A team of 5 needs how many pairs? The formula is n(n−1)/2, so 10."),
+        c("Graphic rating scale",
+          "The most widely used method. The rater scores each trait or behaviour on a scale, such as 1 (poor) to 5 (outstanding).",
+          ["Easy to design and score", "Suits many different jobs", "Prone to halo, leniency and central tendency", "Vague descriptors lead to inconsistent ratings"],
+          "Rate 'initiative' from 1 to 5. What would a 3 look like? Notice how vague it is."),
+        c("Forced distribution",
+          "Raters must place employees into fixed categories that follow a bell curve, for example top 10%, middle 70%, bottom 20%.",
+          ["Controls leniency and central tendency", "Unfair in a team where nearly everyone is strong", "Can damage teamwork and morale"],
+          "Would you join a team of ten stars if two had to be labelled bottom performers?"),
+        c("Checklist method",
+          "The rater answers yes or no to statements about behaviour. In the weighted version, HR assigns a score to each statement.",
+          ["Example statement: 'Completes reports on time'", "Raters do not see the weights, which reduces bias", "Costly to build a separate list for every job"],
+          "Write three checklist statements to appraise a bus driver."),
+        c("Critical incident method",
+          "The manager records specific incidents of effective and ineffective behaviour throughout the year.",
+          ["Gives concrete evidence for feedback", "Reduces recency error", "Time-consuming and can feel like surveillance"],
+          "Why is 'calmed an angry customer on 12 March' more useful than 'good with customers'?"),
+        c("Essay and field review methods",
+          "Both rely on narrative judgement instead of numbers.",
+          ["Essay: the rater writes a free-form description of strengths, weaknesses and potential", "Field review: an HR specialist interviews the manager and writes up the appraisal", "Rich detail, but quality depends on the writer and comparison is hard"],
+          "How would you compare two essay appraisals written by different managers?"),
+        c("Management by Objectives (MBO)",
+          "Introduced by Peter Drucker in 1954. Manager and employee set measurable goals together and review results at the end of the period.",
+          ["Set organisational goals", "Set individual objectives jointly", "Monitor progress with periodic check-ins", "Evaluate results against objectives", "Give feedback and set new objectives"],
+          "What goes wrong if objectives are imposed instead of agreed?", true),
+        c("BARS: Behaviourally Anchored Rating Scales",
+          "BARS joins critical incidents with a rating scale. Each point on the scale is anchored by a real example of behaviour.",
+          ["Reduces vague, subjective ratings", "Built by people who know the job", "Expensive and slow to develop for each role"],
+          "For a 'customer service' scale, what example behaviour would anchor a score of 5?"),
+        c("360-degree feedback",
+          "Feedback is collected from everyone around the employee: manager, peers, subordinates, customers and the employee.",
+          ["Gives a rounded view", "Strong for developing leadership", "Needs anonymity and trained raters, or it becomes a way to settle scores"],
+          "Who would be your toughest rater, and why would their view be valuable?"),
+        c("Assessment centre",
+          "A set of exercises that simulate the job, observed by trained assessors. Used mainly to judge potential and promotion readiness.",
+          ["Typical exercises: in-basket, group discussion, role play, case analysis", "Good at predicting managerial success", "Costly and time-intensive"],
+          "Which exercise would reveal leadership best, and why?"),
+        c("Balanced scorecard",
+          "Developed by Kaplan and Norton. Performance is judged across four perspectives instead of financial results alone.",
+          ["Financial", "Customer", "Internal processes", "Learning and growth"],
+          "A branch hits its sales target but customers are leaving. Which perspective would show the problem?")
+      ]
+    },
+    {
+      id: "td-intro", unit: U2, title: "Training and Development: Significance",
+      cards: [
+        c("What is training?",
+          "A planned, short-term effort to improve an employee's knowledge, skills and attitudes for the job done now.",
+          ["Job-specific and immediate", "Measured by performance improvement", "Usually led by the organisation"],
+          "Name one skill you could be trained in within a week."),
+        c("What is development?",
+          "A long-term, broader process that prepares people for future roles and responsibilities.",
+          ["Focus on growth, judgement and leadership", "Takes years, not weeks", "Depends heavily on the individual's own initiative"],
+          "What development experience would prepare a team leader to become a manager?"),
+        c("Training vs development",
+          "The two overlap, but differ in aim and time horizon.",
+          ["Focus: current job vs future roles", "Duration: short term vs long term", "Scope: specific skills vs overall growth", "Initiative: usually management vs largely the individual"],
+          "Is learning new payroll software training or development? What about preparing for a general manager role?"),
+        c("Education, training and development",
+          "Three related terms along one learning spectrum.",
+          ["Education: broad theoretical knowledge, such as a degree", "Training: job-specific skills", "Development: career growth through experience and learning"],
+          "Where does an MBA sit on this spectrum?"),
+        c("Why training matters to the organisation",
+          "Training is an investment, not a cost, when it targets real needs.",
+          ["Higher productivity and quality", "Fewer errors, accidents and wastage", "Better adaptability to new technology", "Lower attrition and a stronger employer brand", "A ready pipeline of future leaders"],
+          "Which benefit would a finance head find easiest to measure?"),
+        c("Why training matters to employees",
+          "Learning pays back to the individual too.",
+          ["Greater confidence and job security", "Better chances of promotion", "Higher earning potential", "A stronger sense of being valued"],
+          "How might an employer's refusal to fund training affect your decision to stay?"),
+        c("The training cycle",
+          "Effective training runs as a loop, so every programme starts and ends with data.",
+          ["Assess training needs", "Set objectives and design the programme", "Deliver the training", "Evaluate results and feed them back into step 1"],
+          "At which step do organisations most often cut corners?", true),
+        c("How do adults learn? (Andragogy)",
+          "Malcolm Knowles argued that adults learn best when training respects their experience and purpose.",
+          ["They are self-directed", "They bring experience that shapes learning", "They want learning relevant to their role", "They prefer solving problems over memorising content", "They are driven by internal motivation"],
+          "How would you redesign a lecture meant for 20-year-olds for an audience of 45-year-old managers?")
+      ]
+    },
+    {
+      id: "tna", unit: U2, title: "Training Need Analysis (TNA)",
+      cards: [
+        c("What is Training Need Analysis?",
+          "A systematic process of finding the gap between current and desired performance and deciding whether training can close it.",
+          ["Desired performance minus actual performance is the training gap", "TNA is the first step of the training cycle"],
+          "A restaurant's reviews are falling. What gap would you investigate first?"),
+        c("Can't do or won't do?",
+          "Training fixes only 'can't do' problems caused by missing knowledge or skill. 'Won't do' problems need other solutions.",
+          ["Can't do: lack of skill, so train", "Won't do: low motivation, weak incentives or poor tools, so fix the system", "Always diagnose before spending on training"],
+          "Sales are falling. Is the cause poor product knowledge or a bad incentive scheme?"),
+        c("When should a TNA be done?",
+          "Needs arise whenever something changes.",
+          ["Performance gaps or rising complaints", "New technology or processes", "New recruits or role changes", "Restructuring or expansion", "New legal or compliance requirements"],
+          "Which trigger is hardest to see coming?"),
+        c("The three levels of TNA",
+          "McGhee and Thayer (1961) proposed analysing needs at three levels.",
+          ["Organisational analysis: where is training needed?", "Task (operations) analysis: what should be trained?", "Person analysis: who needs training?"],
+          "Which level would you start with, and why?"),
+        c("Organisational analysis",
+          "Examines the whole organisation to see where training will support strategy.",
+          ["Business goals and strategy", "Available resources and budget", "Organisational climate and management support", "Turnover, absenteeism and productivity data"],
+          "Why might a strong programme fail if managers do not support it?"),
+        c("Task analysis",
+          "Studies the job itself to identify the knowledge, skills and abilities (KSAs) required.",
+          ["Review the job description and specification", "List tasks with their frequency and difficulty", "Define the standard of performance", "Convert tasks into KSAs the trainee needs"],
+          "List the KSAs for a bank cashier."),
+        c("Person analysis",
+          "Identifies which employees need training and in what areas.",
+          ["Performance appraisal results", "Skill tests and assessments", "Supervisor recommendations and self-nomination", "Customer complaints and error records"],
+          "How does this link back to the appraisal process?"),
+        c("How is TNA data collected?",
+          "Use several sources, since each one has blind spots.",
+          ["Observation", "Interviews", "Questionnaires and surveys", "Focus groups", "Performance records and appraisal data", "Skill tests"],
+          "Which method is cheapest, and which is most accurate?"),
+        c("What does a TNA produce?",
+          "A clear brief for the training programme.",
+          ["Training objectives", "Target audience and group size", "Content and priorities", "Suitable methods and trainers", "Budget and timeline", "Success measures for evaluation later"],
+          "How do these outputs connect to training evaluation?")
+      ]
+    },
+    {
+      id: "types", unit: U2, title: "Types of Training",
+      cards: [
+        c("Induction (orientation) training",
+          "Welcomes new employees and introduces the organisation, its culture, rules and colleagues.",
+          ["Company history, vision and values", "Policies, benefits and safety rules", "Introduction to the team and the job", "Reduces early attrition and first-week anxiety"],
+          "Think of your first day at a job or internship. What was missing?"),
+        c("Skill (technical) training",
+          "Teaches the specific technical competence needed to do the job.",
+          ["Operating machines or software", "Product and process knowledge", "Usually pairs demonstration with practice"],
+          "How would you check that a trainee can actually perform the skill?"),
+        c("Refresher training",
+          "Updates and reinforces existing skills that have grown rusty or outdated.",
+          ["Triggered by new methods, tools or regulations", "Common in aviation, healthcare and banking"],
+          "Why do pilots repeat emergency drills at regular intervals?"),
+        c("Promotional training",
+          "Prepares employees for higher responsibility before or after a promotion.",
+          ["Leadership and decision-making", "Delegation and people management", "Supports succession planning"],
+          "What can go wrong when a strong specialist is promoted without any training?"),
+        c("Remedial training",
+          "Corrects specific performance gaps identified in appraisal.",
+          ["Usually short and targeted", "Works best with supportive coaching, not punishment"],
+          "How should a manager introduce remedial training without hurting morale?"),
+        c("Safety training",
+          "Protects employees and equipment. Often a legal requirement in hazardous industries.",
+          ["Hazard recognition", "Use of protective equipment", "Emergency and evacuation drills"],
+          "Which industries would you expect to spend the most on this?"),
+        c("Soft-skills (behavioural) training",
+          "Builds interpersonal and personal effectiveness that applies across jobs.",
+          ["Communication and presentation", "Leadership and teamwork", "Time management and emotional intelligence"],
+          "Why is it harder to measure the impact of soft-skills training than technical training?"),
+        c("Cross-functional training",
+          "Employees learn tasks from other jobs or departments.",
+          ["Builds flexibility and cover during absence", "Improves understanding between teams", "Prepares generalists for senior roles"],
+          "What is the risk if one employee is the only person who can do a task?"),
+        c("Compliance and ethics training",
+          "Makes employees aware of laws and company rules.",
+          ["Code of conduct and anti-corruption", "Data protection and information security", "In India, the POSH Act 2013 requires employers to run awareness programmes on sexual harassment at work"],
+          "Is a once-a-year online module enough to change behaviour?")
+      ]
+    },
+    {
+      id: "ojt", unit: U2, title: "On-the-Job and Off-the-Job Training",
+      cards: [
+        c("What is on-the-job training (OJT)?",
+          "Learning while doing the actual job, at the workplace, under the guidance of a supervisor or experienced colleague.",
+          ["Real tools, real tasks, real pace", "Low cost and immediately relevant", "Quality depends on the trainer's skill and time"],
+          "What is the risk of learning surgery, or flying a plane, purely on the job?"),
+        c("Coaching and mentoring",
+          "Two OJT methods built on a relationship with a more experienced person.",
+          ["Coaching: short-term, focused on improving current performance", "Mentoring: long-term, focused on career guidance and growth", "Both rely on regular, honest feedback"],
+          "Who has been a mentor to you, and what did they do that mattered?"),
+        c("Job rotation, understudy and apprenticeship",
+          "Three structured OJT approaches.",
+          ["Job rotation: move across jobs or departments to widen experience", "Understudy: prepare to take over a senior's role by working alongside them", "Apprenticeship: combine paid work with formal instruction over months or years, common for skilled trades"],
+          "Which method best prepares a future department head?"),
+        c("Job Instruction Training (JIT)",
+          "A four-step method for teaching a specific task, developed for industrial training.",
+          ["Prepare the learner", "Present the operation", "Try out the performance", "Follow up"],
+          "Try it: teach a classmate to tie a tie or fold a paper boat using these four steps.", true),
+        c("What is off-the-job training (Off-JT)?",
+          "Training delivered away from the immediate work setting, in a classroom, training centre or online.",
+          ["Learners can focus without work pressure", "Allows safe practice of risky tasks", "Costlier, and learning must be transferred back to the job"],
+          "How would you make sure a trainee applies a workshop's lessons on Monday?"),
+        c("Lectures, conferences and seminars",
+          "Information-based Off-JT methods suited to large groups.",
+          ["Lecture: one-way delivery of knowledge", "Conference or seminar: discussion among participants", "Cheap per head, but passive without interaction"],
+          "How could you make a one-hour lecture more active?"),
+        c("Case study and role play",
+          "Active methods that build judgement and interpersonal skills.",
+          ["Case study: analyse a real or realistic business situation and propose a decision", "Role play: act out a situation, such as handling a complaint", "Debrief after the exercise is where most learning happens"],
+          "Which suits better for teaching negotiation, and why?"),
+        c("Simulation and vestibule training",
+          "Practice in a safe replica of the real environment.",
+          ["Simulation: models real conditions, such as a flight simulator", "Vestibule: a mock workplace with real equipment away from the shop floor", "High safety, high setup cost"],
+          "Which jobs in your city would need this kind of training?"),
+        c("Programmed instruction and e-learning",
+          "Self-paced methods that deliver content in small steps with instant feedback.",
+          ["Programmed instruction: small units, a question after each, immediate correction", "E-learning: online modules, videos, quizzes and virtual classrooms", "Scales cheaply, but completion and motivation can be low"],
+          "What would make you actually finish an online course?"),
+        c("OJT vs Off-JT",
+          "Most organisations use both, because each has strengths the other lacks.",
+          ["Cost: OJT is lower, Off-JT is higher", "Realism: OJT is high, Off-JT is controlled", "Risk of error: OJT is higher, Off-JT is safer", "Scale: OJT is one-to-one, Off-JT reaches many at once"],
+          "Choose a method for training 500 bank staff on a new rule next month."),
+        c("The 70-20-10 model",
+          "A popular rule of thumb from the Center for Creative Leadership for how leaders learn. The ratios are indicative, not fixed.",
+          ["70% from challenging work experience", "20% from other people: feedback, coaching, mentoring", "10% from formal courses"],
+          "What does this suggest about relying only on classroom courses?")
+      ]
+    },
+    {
+      id: "evaluation", unit: U2, title: "Training Evaluation",
+      cards: [
+        c("What is training evaluation and why do it?",
+          "A systematic check of whether a programme met its objectives and whether the spending was justified.",
+          ["Shows if learning happened", "Shows if behaviour and results changed", "Helps improve or cancel weak programmes", "Gives evidence to keep the training budget"],
+          "A programme got rave reviews, but nothing changed at work. Was it a success?"),
+        c("Kirkpatrick's four levels",
+          "Donald Kirkpatrick (1959) proposed four levels, each building on the one before.",
+          ["Reaction: did participants like it?", "Learning: did they gain knowledge or skill?", "Behaviour: do they apply it on the job?", "Results: did the organisation improve?"],
+          "Which level is easiest to measure, and which matters most?", true),
+        c("Levels 1 and 2 in practice",
+          "The first two levels are measured during or right after training.",
+          ["Reaction: feedback forms, often called 'smile sheets'", "Learning: pre-test and post-test, practical demonstrations", "A gain between the pre-test and post-test shows learning"],
+          "What is wrong with judging a programme only on how enjoyable it was?"),
+        c("Levels 3 and 4 in practice",
+          "The last two levels are measured weeks or months after training.",
+          ["Behaviour: manager observation, 360-degree feedback, work samples after 3 to 6 months", "Results: sales, quality, errors, turnover, customer satisfaction", "Harder, because many factors besides training affect results"],
+          "How would you prove that a customer-service course reduced complaints?"),
+        c("Phillips ROI (the fifth level)",
+          "Jack Phillips added return on investment to Kirkpatrick's model by converting benefits into money.",
+          ["Net benefits = programme benefits − programme costs", "ROI (%) = net benefits ÷ programme costs × 100", "Example: costs ₹2,00,000, benefits ₹3,00,000, net ₹1,00,000, so ROI is 50%"],
+          "Which benefits are hard to convert into rupees?"),
+        c("CIPP model",
+          "Stufflebeam's model evaluates the whole programme, not only its outcomes.",
+          ["Context: were the needs and goals right?", "Input: were the plan and resources suitable?", "Process: was it delivered as planned?", "Product: what were the outcomes?"],
+          "Which CIPP stage links most closely to TNA?"),
+        c("Formative vs summative evaluation",
+          "The two differ in timing and purpose.",
+          ["Formative: during the programme, to improve it while it runs", "Summative: at the end, to judge overall effectiveness", "Good practice uses both"],
+          "Give an example of a formative check in a one-day workshop."),
+        c("Evaluation designs",
+          "Designs help separate the effect of training from other influences.",
+          ["Post-test only: weakest, no baseline", "Pre-test and post-test: shows change", "Control group: compares trained and untrained employees", "Time series: measures repeatedly before and after"],
+          "Why is a control group so valuable, and why is it hard to use in practice?"),
+        c("Tools for collecting evaluation data",
+          "Choose tools to match the level being measured.",
+          ["Questionnaires and feedback forms", "Tests and practical assessments", "Interviews and focus groups", "Observation checklists", "Performance and HR records"],
+          "Which tool suits Level 3 best?"),
+        c("Challenges in evaluating training",
+          "Evaluation is often skipped because it is hard.",
+          ["Isolating training from other factors", "Long delay before results appear", "Cost and time of follow-up", "Managers not supporting transfer", "Benefits that are intangible, such as morale"],
+          "How can HR build evaluation into the plan before training begins?")
+      ]
+    },
+    {
+      id: "retention", unit: U3, title: "Attrition and Employee Retention",
+      cards: [
+        c("What is attrition?",
+          "The rate at which employees leave an organisation over a period. The term is often used together with employee turnover.",
+          ["Includes resignations, retirement, termination and death", "A high rate disrupts operations and raises costs", "Some attrition is healthy, since it brings fresh talent"],
+          "Is zero attrition a good goal? Why or why not?"),
+        c("How is the attrition rate calculated?",
+          "Attrition rate (%) = number of separations in the period ÷ average number of employees in the period × 100.",
+          ["Average employees = (opening headcount + closing headcount) ÷ 2", "Example: 30 leave, average headcount 300, so attrition is 10%", "Compare against the industry average, not just last year"],
+          "A team has 50 people and 8 leave in a year. What is the rate?"),
+        c("Types of attrition",
+          "Classifying attrition shows which losses to worry about.",
+          ["Voluntary: the employee chooses to leave", "Involuntary: dismissal, layoff or end of contract", "Functional: low performers leave, which can help", "Dysfunctional: high performers leave, which hurts"],
+          "Which type should HR work hardest to prevent?"),
+        c("Why do employees leave?",
+          "Causes usually sit with pay, growth, managers and fit.",
+          ["Pay and benefits below the market", "Limited career growth", "Poor relationship with the manager", "Lack of recognition", "Work-life imbalance", "Weak culture or poor job fit", "A better external offer"],
+          "People are often said to leave managers, not companies. Do you agree?"),
+        c("What does attrition cost?",
+          "Costs go well beyond the replacement hire.",
+          ["Recruitment, hiring and onboarding expense", "Training time for the replacement", "Lost productivity and knowledge", "Lower morale among those who stay", "Estimates range widely, from about half to twice annual salary depending on the role"],
+          "Which cost is hardest to see in the accounts?"),
+        c("Exit interviews and stay interviews",
+          "Two listening tools, used at different times.",
+          ["Exit interview: held when someone is leaving, to learn why", "Stay interview: held with current staff, to learn what keeps them", "Stay interviews let you act before resignation"],
+          "Why might a leaving employee not give an honest answer?"),
+        c("Retention strategy: pay and benefits",
+          "Compensation is a baseline. It rarely retains people alone, but being below market quickly drives them away.",
+          ["Competitive, fair pay", "Performance bonuses and recognition awards", "Health insurance and retirement benefits", "ESOPs and retention bonuses for key talent"],
+          "Would you stay for a 10% raise if your manager was poor?"),
+        c("Retention strategy: career growth",
+          "People stay where they can see a future.",
+          ["Clear career paths and promotion criteria", "Training and development budgets", "Internal job postings and mobility", "Succession planning for key roles"],
+          "How does training link to retention?"),
+        c("Retention strategy: environment and wellbeing",
+          "Culture and flexibility shape daily experience.",
+          ["Flexible hours and hybrid options", "Manageable workloads and leave", "Employee assistance and wellbeing programmes", "Respectful, inclusive culture"],
+          "Which of these would matter most to you in your first job?"),
+        c("Retention strategy: recognition, leadership and onboarding",
+          "Early experience and daily management are strong retention levers.",
+          ["Structured onboarding in the first 90 days", "Regular feedback and public recognition", "Managers trained to coach, not just supervise", "Realistic job previews during hiring"],
+          "How does a poor first week raise the risk of early exit?"),
+        c("Herzberg's theory and retention",
+          "Frederick Herzberg split job factors into two groups. Retention needs both.",
+          ["Hygiene factors: pay, conditions, policies, job security. Poor ones cause dissatisfaction, but good ones do not motivate", "Motivators: achievement, recognition, responsibility, growth. These drive satisfaction", "Fixing pay alone will not create engagement"],
+          "Classify each factor in the retention strategy cards as hygiene or motivator.")
+      ]
+    },
+    {
+      id: "ai-hr", unit: U3, title: "Trends in HR: Role of AI",
+      cards: [
+        c("What is AI in HR?",
+          "The use of machine learning, language models and automation to support HR decisions and services.",
+          ["Automates repetitive administration", "Analyses large amounts of people data", "Generates text, summaries and recommendations", "Works best as support for HR professionals, not a replacement"],
+          "Which HR task would you hand to AI first, and which would you never hand over?"),
+        c("AI in recruitment",
+          "AI speeds up the hiring funnel from sourcing to scheduling.",
+          ["Drafting job descriptions", "Screening and matching résumés to roles", "Chatbots answering candidate queries and booking interviews", "Skills-based matching beyond job titles"],
+          "What could go wrong if a screening tool learns from past hiring decisions?"),
+        c("AI in onboarding and employee service",
+          "HR chatbots give instant answers and cut paperwork.",
+          ["24/7 answers on leave, payroll and policy", "Automated document collection and checklists", "Frees HR time for complex cases"],
+          "Which queries should always go to a human?"),
+        c("AI in learning and development",
+          "AI personalises learning and links it to skill gaps.",
+          ["Skill-gap analysis from role and performance data", "Personalised learning paths", "Adaptive content and AI tutors", "Feeds directly into training need analysis"],
+          "How could AI improve the TNA you studied earlier?"),
+        c("AI in performance and talent analytics",
+          "Data from work systems supports more continuous, evidence-based reviews.",
+          ["Goal tracking and real-time feedback", "Summaries of 360-degree comments", "Succession and talent-pool recommendations", "Risk: tracking too much feels like surveillance"],
+          "Where is the line between useful insight and invasive monitoring?"),
+        c("Predictive attrition analytics",
+          "Models estimate which employees may leave, using signals such as tenure, pay position, manager changes and engagement.",
+          ["Gives an early warning for stay interviews", "Targets retention effort where it counts", "Predictions are probabilities, not facts, and must never be used to penalise people"],
+          "What would you do if the model flags your best performer as a flight risk?"),
+        c("Risks: bias, privacy and transparency",
+          "AI can scale mistakes as easily as it scales efficiency.",
+          ["Bias: Amazon reportedly scrapped an experimental hiring tool in 2018 after it favoured male candidates", "Privacy: employee data needs consent and protection, as in India's DPDP Act 2023", "Transparency: people should know when AI influences decisions about them"],
+          "Who is accountable when an algorithm rejects a good candidate?"),
+        c("Human in the loop",
+          "Good practice keeps people in charge of decisions that affect careers.",
+          ["AI recommends, a human decides", "Audit tools regularly for bias", "Explain how results are produced", "Train HR staff in data literacy and ethics"],
+          "Write one rule your organisation should adopt before using AI in hiring."),
+        c("Other major trends in HR",
+          "AI sits alongside wider shifts in how work is organised.",
+          ["Hybrid and remote work", "Skills-based hiring and internal mobility", "Employee wellbeing and mental health support", "Diversity, equity and inclusion", "People analytics and the gig workforce"],
+          "Which trend has changed your own college or work life most?"),
+        c("The changing role of HR (Ulrich model)",
+          "Dave Ulrich described four roles for modern HR, moving beyond administration.",
+          ["Strategic partner", "Change agent", "Employee champion", "Administrative expert"],
+          "How does AI free HR to spend more time on the first three roles?")
+      ]
+    }
+  ];
+
+  DECKS.forEach(function (d) {
+    d.cards.forEach(function (card, i) { card.id = d.id + "-" + i; });
+  });
+  var ALL = {
+    id: "all", unit: "All units", title: "All topics",
+    cards: DECKS.reduce(function (acc, d) { return acc.concat(d.cards); }, [])
+  };
+  var TOTAL = ALL.cards.length;
+
+  var KEY = "hrm-flashcards-v1";
+  var store = { progress: {}, mode: "study" };
+  try {
+    var raw = localStorage.getItem(KEY);
+    if (raw) {
+      var parsed = JSON.parse(raw);
+      if (parsed && parsed.progress) { store.progress = parsed.progress; store.mode = parsed.mode === "teach" ? "teach" : "study"; }
+    }
+  } catch (e) {}
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} }
+
+  var state = { deckId: DECKS[0].id, idx: 0, flipped: false, shuffle: false, missedOnly: false, order: [], busy: false };
+  var resetArmed = false, resetTimer = null;
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, cls, text) {
+    var e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  }
+  function deckById(id) { return id === "all" ? ALL : DECKS.filter(function (d) { return d.id === id; })[0]; }
+  function reducedMotion() { return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; }
+
+  function shuffleArr(a) {
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  function buildOrder() {
+    var list = deckById(state.deckId).cards.slice();
+    if (state.missedOnly) list = list.filter(function (c) { return store.progress[c.id] === "review"; });
+    if (state.shuffle) shuffleArr(list);
+    state.order = list;
+    state.idx = 0;
+    state.flipped = false;
+  }
+
+  function countKnown(cards) {
+    return cards.filter(function (c) { return store.progress[c.id] === "known"; }).length;
+  }
+
+  function renderNav() {
+    var nav = $("topics");
+    nav.replaceChildren();
+    var lastUnit = null;
+    var entries = [{ id: "all", unit: "Overview", title: "All topics", cards: ALL.cards }].concat(DECKS);
+    entries.forEach(function (d) {
+      if (d.unit !== lastUnit) {
+        nav.appendChild(el("p", "unit-label", d.unit));
+        lastUnit = d.unit;
+      }
+      var b = el("button", "topic-btn");
+      b.type = "button";
+      b.setAttribute("aria-current", d.id === state.deckId ? "true" : "false");
+      var known = countKnown(d.cards), n = d.cards.length;
+      b.appendChild(el("span", "t", d.title));
+      var m = el("span", "m");
+      m.appendChild(el("span", null, known + " / " + n + " known"));
+      b.appendChild(m);
+      var mini = el("span", "mini");
+      var fill = el("i");
+      fill.style.width = Math.round(known / n * 100) + "%";
+      mini.appendChild(fill);
+      b.appendChild(mini);
+      b.addEventListener("click", function () { selectDeck(d.id); });
+      nav.appendChild(b);
+    });
+  }
+
+  function fillBody(container, card) {
+    container.replaceChildren();
+    container.appendChild(el("p", "ans", card.a));
+    if (card.pts.length) {
+      var list = el(card.ord ? "ol" : "ul", "pts");
+      card.pts.forEach(function (p) { list.appendChild(el("li", null, p)); });
+      container.appendChild(list);
+    }
+  }
+
+  function render() {
+    var deck = deckById(state.deckId);
+    var n = state.order.length;
+    var teach = store.mode === "teach";
+    var done = n > 0 && state.idx >= n;
+    var empty = n === 0;
+
+    $("unitLabel").textContent = deck.unit;
+    $("deckTitle").textContent = deck.title;
+    var counter = empty ? "0 cards" : done ? "Complete" : "Card " + (state.idx + 1) + " of " + n;
+    $("counter").textContent = counter;
+    $("live").textContent = counter;
+    var pct = empty ? 0 : Math.round((done ? n : state.idx) / n * 100);
+    $("bar").style.width = pct + "%";
+    $("track").setAttribute("aria-valuenow", String(pct));
+
+    $("studyView").hidden = teach || done || empty;
+    $("teachView").hidden = !teach || done || empty;
+    $("summaryView").hidden = !done;
+    $("emptyView").hidden = !empty;
+    $("actions").hidden = done || empty;
+    $("marks").hidden = teach || done || empty;
+
+    $("modeStudy").setAttribute("aria-pressed", String(!teach));
+    $("modeTeach").setAttribute("aria-pressed", String(teach));
+
+    var missedCount = deck.cards.filter(function (c) { return store.progress[c.id] === "review"; }).length;
+    $("missedBtn").textContent = "Missed only (" + missedCount + ")";
+    $("missedBtn").setAttribute("aria-pressed", String(state.missedOnly));
+    $("missedBtn").disabled = !state.missedOnly && missedCount === 0;
+    $("shuffleBtn").setAttribute("aria-pressed", String(state.shuffle));
+    $("overall").textContent = countKnown(ALL.cards) + " of " + TOTAL + " cards known";
+
+    if (done) {
+      var known = countKnown(state.order);
+      var review = state.order.filter(function (c) { return store.progress[c.id] === "review"; }).length;
+      var skipped = n - known - review;
+      $("sumTitle").textContent = deck.title;
+      $("sumKnown").textContent = String(known);
+      $("sumReview").textContent = String(review);
+      $("sumText").textContent = review > 0
+        ? "Go back over the " + review + " card" + (review === 1 ? "" : "s") + " you flagged, then try the topic again from the start."
+        : skipped > 0
+          ? skipped + " card" + (skipped === 1 ? " was" : "s were") + " not marked. Start again to finish them."
+          : "Every card in this set is marked as known. Move on to the next topic.";
+      $("sumMissed").disabled = review === 0 || state.missedOnly;
+      $("sumNext").hidden = state.deckId === "all";
+    }
+
+    if (!done && !empty) {
+      var card = state.order[state.idx];
+      var status = store.progress[card.id];
+      $("prev").disabled = state.idx === 0;
+      $("next").disabled = teach && state.idx === n - 1;
+      $("next").innerHTML = (!teach && state.idx === n - 1) ? "Finish" : "Next &rarr;";
+
+      if (!teach) {
+        $("qText").textContent = card.q;
+        fillBody($("backBody"), card);
+        $("backNote").hidden = !card.note;
+        $("backNoteText").textContent = card.note;
+        var badge = $("badge");
+        badge.hidden = !status;
+        badge.className = "badge " + (status || "");
+        badge.textContent = status === "known" ? "Got it" : "To review";
+        $("card").classList.toggle("flipped", state.flipped);
+        $("faceFront").setAttribute("aria-hidden", String(state.flipped));
+        $("faceBack").setAttribute("aria-hidden", String(!state.flipped));
+        $("flip").textContent = state.flipped ? "Show question" : "Flip card";
+      } else {
+        $("tQ").textContent = card.q;
+        fillBody($("tBody"), card);
+        $("tNote").hidden = !card.note;
+        $("tNoteText").textContent = card.note;
+        $("tA").hidden = !state.flipped;
+        $("tHint").hidden = state.flipped;
+        $("flip").textContent = state.flipped ? "Hide answer" : "Reveal answer";
+      }
+    }
+  }
+
+  function selectDeck(id) {
+    state.deckId = id;
+    state.missedOnly = false;
+    buildOrder();
+    renderNav();
+    render();
+  }
+
+  function navTo(newIdx) {
+    if (state.busy) return;
+    var teach = store.mode === "teach";
+    if (state.flipped && !teach && !reducedMotion() && newIdx < state.order.length) {
+      state.busy = true;
+      state.flipped = false;
+      $("card").classList.remove("flipped");
+      setTimeout(function () { state.idx = newIdx; state.busy = false; render(); }, 300);
+    } else {
+      state.flipped = false;
+      state.idx = newIdx;
+      render();
+    }
+  }
+
+  function step(d) {
+    var n = state.order.length;
+    if (n === 0) return;
+    var teach = store.mode === "teach";
+    if (state.idx >= n) { if (d < 0) navTo(n - 1); return; }
+    if (d > 0) {
+      if (state.idx === n - 1) { if (!teach) navTo(n); }
+      else navTo(state.idx + 1);
+    } else if (state.idx > 0) {
+      navTo(state.idx - 1);
+    }
+  }
+
+  function toggleFlip() {
+    if (state.busy) return;
+    if (state.order.length === 0 || state.idx >= state.order.length) return;
+    state.flipped = !state.flipped;
+    render();
+  }
+
+  function mark(v) {
+    if (store.mode === "teach") return;
+    if (state.order.length === 0 || state.idx >= state.order.length) return;
+    var card = state.order[state.idx];
+    store.progress[card.id] = v;
+    save();
+    renderNav();
+    navTo(state.idx + 1);
+  }
+
+  function setMode(m) {
+    store.mode = m;
+    state.flipped = false;
+    save();
+    render();
+  }
+
+  $("modeStudy").addEventListener("click", function () { setMode("study"); });
+  $("modeTeach").addEventListener("click", function () { setMode("teach"); });
+  $("card").addEventListener("click", toggleFlip);
+  $("flip").addEventListener("click", toggleFlip);
+  $("prev").addEventListener("click", function () { step(-1); });
+  $("next").addEventListener("click", function () { step(1); });
+  $("mKnown").addEventListener("click", function () { mark("known"); });
+  $("mReview").addEventListener("click", function () { mark("review"); });
+
+  $("shuffleBtn").addEventListener("click", function () {
+    state.shuffle = !state.shuffle;
+    buildOrder();
+    render();
+  });
+  $("missedBtn").addEventListener("click", function () {
+    state.missedOnly = !state.missedOnly;
+    buildOrder();
+    render();
+  });
+  $("emptyBack").addEventListener("click", function () {
+    state.missedOnly = false;
+    buildOrder();
+    render();
+  });
+  $("sumMissed").addEventListener("click", function () {
+    state.missedOnly = true;
+    buildOrder();
+    render();
+  });
+  $("sumRestart").addEventListener("click", function () {
+    buildOrder();
+    render();
+  });
+  $("sumNext").addEventListener("click", function () {
+    var i = DECKS.map(function (d) { return d.id; }).indexOf(state.deckId);
+    selectDeck(DECKS[(i + 1) % DECKS.length].id);
+  });
+
+  var fsBtn = $("fsBtn");
+  if (!document.fullscreenEnabled) {
+    fsBtn.hidden = true;
+  } else {
+    fsBtn.addEventListener("click", function () {
+      try {
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          var p = $("stage").requestFullscreen();
+          if (p && p.catch) p.catch(function () {});
+        }
+      } catch (e) {}
+    });
+    document.addEventListener("fullscreenchange", function () {
+      fsBtn.textContent = document.fullscreenElement ? "Exit full screen" : "Full screen";
+    });
+  }
+
+  $("resetBtn").addEventListener("click", function () {
+    var b = $("resetBtn");
+    if (!resetArmed) {
+      resetArmed = true;
+      b.textContent = "Click again to clear";
+      clearTimeout(resetTimer);
+      resetTimer = setTimeout(function () { resetArmed = false; b.textContent = "Reset progress"; }, 4000);
+      return;
+    }
+    clearTimeout(resetTimer);
+    resetArmed = false;
+    b.textContent = "Reset progress";
+    store.progress = {};
+    save();
+    state.missedOnly = false;
+    buildOrder();
+    renderNav();
+    render();
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var tag = e.target && e.target.tagName;
+    if (e.key === "ArrowRight") { e.preventDefault(); step(1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); step(-1); }
+    else if (e.key === " " || e.key === "Enter") {
+      if (tag === "BUTTON") return;
+      e.preventDefault();
+      toggleFlip();
+    }
+    else if (e.key === "1") { mark("review"); }
+    else if (e.key === "2") { mark("known"); }
+  });
+
+  buildOrder();
+  renderNav();
+  render();
+})();
+</script>
+
+</body></html>
